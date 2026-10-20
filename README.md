@@ -121,6 +121,17 @@ npm run check     # tsc
 npm run build     # emits dist/
 ```
 
+### Releasing
+
+Releases go out from GitHub Actions through npm trusted publishing (`.github/workflows/publish.yml`). Bump the version and push the tag:
+
+```sh
+npm version patch   # or minor / major
+git push --follow-tags
+```
+
+The workflow checks that the tag matches `package.json`, then runs the type check, tests and build before publishing with provenance.
+
 ## Credits
 
 - 3-D simplex noise: Ashima Arts, [webgl-noise](https://github.com/ashima/webgl-noise) (MIT)
