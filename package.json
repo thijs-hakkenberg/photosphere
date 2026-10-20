@@ -1,0 +1,71 @@
+{
+	"name": "photosphere",
+	"version": "0.1.0",
+	"description": "Procedural, physically-motivated Sun for three.js: granulation, sunspots on a real 11-year cycle, limb darkening, corona and prominences. Injectable via a small factory interface.",
+	"license": "MIT",
+	"author": "Thijs Hakkenberg",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/thijs-hakkenberg/photosphere.git"
+	},
+	"homepage": "https://github.com/thijs-hakkenberg/photosphere#readme",
+	"bugs": "https://github.com/thijs-hakkenberg/photosphere/issues",
+	"keywords": [
+		"three",
+		"threejs",
+		"threlte",
+		"svelte",
+		"sun",
+		"star",
+		"shader",
+		"glsl",
+		"procedural",
+		"astronomy",
+		"sunspots"
+	],
+	"type": "module",
+	"sideEffects": false,
+	"exports": {
+		".": {
+			"types": "./dist/index.d.ts",
+			"default": "./dist/index.js"
+		},
+		"./svelte": {
+			"types": "./dist/svelte.d.ts",
+			"default": "./dist/svelte.js"
+		},
+		"./package.json": "./package.json"
+	},
+	"main": "./dist/index.js",
+	"types": "./dist/index.d.ts",
+	"files": [
+		"dist",
+		"src",
+		"!src/**/__tests__"
+	],
+	"scripts": {
+		"build": "rm -rf dist && tsc -p tsconfig.build.json",
+		"check": "tsc -p tsconfig.json",
+		"test": "vitest",
+		"test:run": "vitest run",
+		"dev": "vite example",
+		"prepublishOnly": "npm run check && npm run test:run && npm run build"
+	},
+	"peerDependencies": {
+		"svelte": "^4.0.0 || ^5.0.0",
+		"three": ">=0.160.0"
+	},
+	"peerDependenciesMeta": {
+		"svelte": {
+			"optional": true
+		}
+	},
+	"devDependencies": {
+		"@types/three": "^0.186.0",
+		"svelte": "^5.48.2",
+		"three": "^0.186.1",
+		"typescript": "^5.9.3",
+		"vite": "^7.3.1",
+		"vitest": "^4.0.18"
+	}
+}

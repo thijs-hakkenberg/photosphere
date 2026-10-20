@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>photosphere example</title>
+		<style>
+			html, body { margin: 0; height: 100%; background: #000; color: #ccc; font: 13px system-ui, sans-serif; }
+			canvas { display: block; }
+			#hud { position: fixed; left: 12px; bottom: 12px; display: flex; gap: 12px; align-items: center; }
+		</style>
+	</head>
+	<body>
+		<div id="hud">
+			<label>Year <input id="year" type="range" min="2019" max="2031" step="0.01" value="2024.5" /></label>
+			<span id="yearLabel"></span>
+			<label><input id="white" type="checkbox" /> white light</label>
+		</div>
+		<script type="module" src="./main.ts"></script>
+	</body>
+</html>
