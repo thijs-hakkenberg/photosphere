@@ -2,6 +2,8 @@
 
 A procedural, physically-motivated Sun for [three.js](https://threejs.org). It renders on the GPU, needs no textures, and you can swap it in through a small factory interface.
 
+**[Live demo](https://photosphere-eta.vercel.app)**: the example viewer, redeployed with every release.
+
 - **Granulation** at true scale (~1,400 km cells, ~500 per solar radius), using evolving Worley cells with dark intergranular lanes. When granules shrink below a pixel they fade out instead of aliasing.
 - **Meso- and supergranulation** keep some texture on the unresolved disc.
 - **Sunspots** come from a statistical 11-year cycle phased to the Cycle 25 minimum. Latitudes follow Spörer's law (the butterfly diagram) and groups tilt per Joy's law. Each spot has an umbra (~3,900 K) and a filamentary penumbra (~5,500 K), with faculae near the limb.
