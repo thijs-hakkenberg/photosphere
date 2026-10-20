@@ -2,6 +2,8 @@
 
 A procedural, physically-motivated Sun for [three.js](https://threejs.org). It renders on the GPU, needs no textures, and you can swap it in through a small factory interface.
 
+[![photosphere rendering the Sun in Hα false colour, 2024.8: granulation, sunspot groups, prominences and coronal streamers](https://raw.githubusercontent.com/thijs-hakkenberg/photosphere/main/docs/photosphere.webp)](https://photosphere-eta.vercel.app)
+
 **[Live demo](https://photosphere-eta.vercel.app)**: the example viewer, redeployed with every release.
 
 - **Granulation** at true scale (~1,400 km cells, ~500 per solar radius), using evolving Worley cells with dark intergranular lanes. When granules shrink below a pixel they fade out instead of aliasing.
