@@ -123,14 +123,19 @@ npm run build     # emits dist/
 
 ### Releasing
 
-Releases go out from GitHub Actions through npm trusted publishing (`.github/workflows/publish.yml`). Bump the version and push the tag:
+Releases are staged from GitHub Actions through npm trusted publishing (`.github/workflows/publish.yml`), then approved by a maintainer with 2FA. Bump the version and push the tag:
 
 ```sh
 npm version patch   # or minor / major
 git push --follow-tags
 ```
 
-The workflow checks that the tag matches `package.json`, then runs the type check, tests and build before publishing with provenance.
+The workflow checks that the tag matches `package.json`, runs the type check, tests and build, and stages the release with provenance. To publish it:
+
+```sh
+npm stage list photosphere
+npm stage approve <stage-id>
+```
 
 ## Credits
 

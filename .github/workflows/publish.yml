@@ -1,6 +1,7 @@
-# Publishes to npm via trusted publishing (OIDC): no npm token is stored.
-# Release: bump the version, then push the tag, e.g.
+# Stages a release on npm via trusted publishing (OIDC): no npm token is stored,
+# and the trusted publisher may only stage. A maintainer approves with 2FA:
 #   npm version patch && git push --follow-tags
+#   npm stage list photosphere && npm stage approve <stage-id>
 name: Publish
 
 on:
@@ -20,12 +21,12 @@ jobs:
         with:
           node-version: 24
           registry-url: https://registry.npmjs.org
-      # Trusted publishing needs npm >= 11.5.1
-      - run: npm install -g npm@^11.5.1
+      # Staged publishing needs npm >= 11.15.0
+      - run: npm install -g npm@^11.15.0
       - name: Tag matches package.json version
         run: |
           v=$(node -p "require('./package.json').version")
           [ "v$v" = "$GITHUB_REF_NAME" ] || { echo "Tag $GITHUB_REF_NAME does not match package.json v$v"; exit 1; }
       - run: npm ci
       # prepublishOnly runs check, tests and build
-      - run: npm publish --access public
+      - run: npm stage publish --access public
