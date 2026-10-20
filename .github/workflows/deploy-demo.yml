@@ -1,0 +1,52 @@
+# Deploys the example viewer to Vercel. Release tags go to production, so the
+# demo tracks the latest published version; run manually for a preview.
+# Secrets: VERCEL_TOKEN, VERCEL_ORG_ID, VERCEL_PROJECT_ID
+name: Deploy demo
+
+on:
+  push:
+    tags: ['v*']
+  workflow_dispatch:
+    inputs:
+      production:
+        description: Deploy to production
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+concurrency:
+  group: deploy-demo
+  cancel-in-progress: false
+
+env:
+  VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+  VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: ${{ (github.event_name == 'push' || inputs.production) && 'demo' || 'demo-preview' }}
+      url: ${{ steps.deploy.outputs.url }}
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm install -g vercel@latest
+      - name: Deploy
+        id: deploy
+        run: |
+          if [ "${{ github.event_name == 'push' || inputs.production }}" = "true" ]; then
+            target=production; flag=--prod
+          else
+            target=preview; flag=
+          fi
+          vercel pull --yes --environment=$target --token=${{ secrets.VERCEL_TOKEN }}
+          vercel build $flag --token=${{ secrets.VERCEL_TOKEN }}
+          url=$(vercel deploy --prebuilt $flag --token=${{ secrets.VERCEL_TOKEN }})
+          echo "url=$url" >> "$GITHUB_OUTPUT"
+          echo "Deployed $target: $url" >> "$GITHUB_STEP_SUMMARY"

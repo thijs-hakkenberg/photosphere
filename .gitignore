@@ -3,3 +3,4 @@ dist/
 example/dist/
 *.tgz
 .DS_Store
+.vercel/

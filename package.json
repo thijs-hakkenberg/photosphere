@@ -49,6 +49,7 @@
 		"test": "vitest",
 		"test:run": "vitest run",
 		"dev": "vite example",
+		"build:demo": "vite build example --outDir dist --emptyOutDir",
 		"prepublishOnly": "npm run check && npm run test:run && npm run build"
 	},
 	"peerDependencies": {
